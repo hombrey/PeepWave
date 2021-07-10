@@ -13,12 +13,17 @@
     <div id="srcdir" style="display:none;">../src/PeepWave/</div>
     <div id="assetdir" style="display:none">./</div>
     <canvas class="canvasClass" id="canvas" width="1280" height="720" ></canvas>
+    <div id="pauseIndicator"></div>
     <select class="selectBox" id="dummy"><option>Peep Wave</option></select>
     <script type="text/javascript" src="../src/PeepWave/functions.js" ></script> 
 </body> 
     <script> 
       function initArrays() {
           wavSet = [new sound (srcDir+"wav/pick.mp3"),
+              new sound (assetDir+"wav/prompt1.mp3"),
+              new sound (assetDir+"wav/prompt2.mp3"),
+              new sound (assetDir+"wav/prompt3.mp3"),
+              new sound (assetDir+"wav/prompt4.mp3"),
           new sound (srcDir+"wav/pick.mp3")];
           picSet = [ {},
               {src: "scene1.jpg", wav: 1 },
