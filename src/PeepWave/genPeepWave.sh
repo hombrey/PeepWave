@@ -18,6 +18,7 @@ echo "    <img class=\"fullPage\" id=\"backgroundX\" src=\"$SOURCEDIR/img/scene0
 echo "    <div id=\"srcdir\" style=\"display:none;\">$SOURCEDIR/</div>" >> xPeepWave.html
 echo "    <div id=\"assetdir\" style=\"display:none\">./</div>" >> xPeepWave.html
 echo "    <canvas class=\"canvasClass\" id=\"canvas\" width=\"1280\" height=\"720\" ></canvas>" >> xPeepWave.html
+echo "    <div id=\"pauseIndicator\"></div>" >> xPeepWave.html
 echo "    <select class=\"selectBox\" id=\"dummy\"><option>Peep Wave</option></select>" >> xPeepWave.html
 echo "    <script type=\"text/javascript\" src=\"$SOURCEDIR/functions.js\" ></script> " >> xPeepWave.html
 echo "</body> " >> xPeepWave.html
@@ -60,3 +61,7 @@ echo "    </script> " >> xPeepWave.html
 echo "</html> " >> xPeepWave.html
 
 rm /tmp/list.txt
+
+# creete directories used by this iframe. Ignore errors if directories already exist
+mkdir wav || true
+mkdir alt || true

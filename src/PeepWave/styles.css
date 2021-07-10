@@ -33,6 +33,16 @@ body {
 
 /*{{{id selector*/
 
+#pauseIndicator{
+    position: fixed;
+    top: 2vh;
+    left: 2vw;
+    width: 2vh;
+    height: 2vw;
+    z-index: 3;
+    display: none;
+    opacity: 0.2;
+} /* pauseIcon */
 #myBody {
 
 } /*#myBody*/

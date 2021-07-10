@@ -4,6 +4,7 @@ let scaleX, scaleY;
 let bgX;
 let currentScene=0;
 let holeInit = false;
+let pauseIndicator;
 let canvas, ctx2D;
 let prevX = 0, currX = 0, prevY = 0, currY = 0;
 let hole = 75;
@@ -17,7 +18,7 @@ let imgIndex=0;
 let picSet;
 let wavSet;
 let isCanvasVisible=false;
-let isPlaying;
+let isPlaying=false;
 //}}}variable declarations
 
 //{{{event listeners
@@ -108,6 +109,7 @@ async function initWin() {
 
     initArrays(); 
 
+    pauseIndicator = document.getElementById('pauseIndicator');
     document.getElementById("dummy").focus(); //dummy select element that grabs the focus of the iframe
 
 } //function initWin()
@@ -159,10 +161,11 @@ function showAlt() {
     tingSound.start();
 } //function showAlt()
 function nextScene(chosenIndx) {
+    isPlaying = false;
+
     hole = 75;
     ctx2D.fillRect (0,0, canvas.width, canvas.height);
     drawHole();
-    
     imgIndex=chosenIndx;
     //console.log("index: "+imgIndex);
     if (imgIndex<1) imgIndex = picSet.length-2;
@@ -178,8 +181,17 @@ function nextScene(chosenIndx) {
 function togglePlay() {
 
     //console.log ("audio: "+wavSet[picSet[imgIndex].wav].sound.src);
-    if (isPlaying) {wavSet[picSet[imgIndex].wav].pause(); isPlaying = false}
-    else {wavSet[picSet[imgIndex].wav].play(); isPlaying = true}
+    if (isPlaying) {
+        if (wavSet[picSet[imgIndex].wav]) pauseIndicator.style.display = "block";
+        pauseIndicator.style.backgroundColor = "red";
+        wavSet[picSet[imgIndex].wav].pause(); 
+        isPlaying = false; console.log("pause");
+    } else {
+        if (wavSet[picSet[imgIndex].wav]) pauseIndicator.style.display = "block";
+        pauseIndicator.style.backgroundColor = "green";
+        wavSet[picSet[imgIndex].wav].play(); 
+        isPlaying = true
+    } // if (isPlaying)
 } //function togglePlay()
 //}}}handler functions
 
@@ -208,6 +220,7 @@ function sound(src) {
     }//this.stop = function(){    
     this.sound.onended = function () {
         isPlaying = false;
+        pauseIndicator.style.display = "none";
     }; //sound.onended
 }//function sound(src)
 
