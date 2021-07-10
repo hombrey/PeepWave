@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title> 
+    <meta name="description" content"">
+    <meta name="author" content="Hombrey">
+    <link rel="stylesheet" href="../src/PeepWave/styles.css">
+</head>
+
+<body id="myBody">
+    <img class="fullPage" id="backgroundX" src="../src/PeepWave/img/scene0.jpg">
+    <div id="srcdir" style="display:none;">../src/PeepWave/</div>
+    <div id="assetdir" style="display:none">./</div>
+    <canvas class="canvasClass" id="canvas" width="1280" height="720" ></canvas>
+    <select class="selectBox" id="dummy"><option>Peep Wave</option></select>
+    <script type="text/javascript" src="../src/PeepWave/functions.js" ></script> 
+</body> 
+    <script> 
+      function initArrays() {
+          wavSet = [new sound (srcDir+"wav/pick.mp3"),
+              new sound (assetDir+"wav/prompt1.mp3"),
+              new sound (assetDir+"wav/prompt2.mp3"),
+              new sound (assetDir+"wav/prompt3.mp3"),
+              new sound (assetDir+"wav/prompt4.mp3"),
+              new sound (assetDir+"wav/prompt5.mp3"),
+              new sound (assetDir+"wav/prompt6.mp3"),
+              new sound (assetDir+"wav/prompt7.mp3"),
+              new sound (assetDir+"wav/prompt8.mp3"),
+              new sound (assetDir+"wav/prompt9.mp3"),
+          new sound (srcDir+"wav/pick.mp3")];
+          picSet = [ {},
+              {src: "scene1.jpg", wav: 1 },
+              {src: "scene2.jpg", wav: 2 },
+              {src: "scene3.jpg", wav: 3 },
+              {src: "scene4.jpg", wav: 4 },
+              {src: "scene5.jpg", wav: 5 },
+              {src: "scene6.jpg", wav: 6 },
+              {src: "scene7.jpg", wav: 7 },
+              {src: "scene8.jpg", wav: 8 },
+              {src: "scene9.jpg", wav: 9 },
+          {}];
+      } // function initArrays()
+    </script> 
+</html> 

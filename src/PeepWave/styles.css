@@ -1,0 +1,46 @@
+/*{{{element selector*/
+body {
+    background-color: black;
+}
+        /*}}}element selector*/
+
+/*{{{class selector*/
+.fullPage {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    margin: auto;
+    overflow-x: hidden;
+} /*fullPage*/
+.canvasClass {
+    position: fixed;
+    top:0vh;
+    left:0vw;
+    border:2px solid;
+    margin: auto;
+    display: none;
+    oxverflow-x: hidden;
+} /*canvas*/
+.selectBox {
+    position: fixed;
+    overflow-x: hidden;
+    top: 0px;
+    left: 0px;
+} /*.selectBox*/
+/*}}}class*/
+
+/*{{{id selector*/
+
+#myBody {
+
+} /*#myBody*/
+
+#backgroundX {
+
+} /*#backgroundX*/
+
+
+
+/*}}}id selector*/
