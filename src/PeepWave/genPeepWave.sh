@@ -63,5 +63,4 @@ echo "</html> " >> xPeepWave.html
 rm /tmp/list.txt
 
 # creete directories used by this iframe. Ignore errors if directories already exist
-mkdir wav || true
 mkdir alt || true
