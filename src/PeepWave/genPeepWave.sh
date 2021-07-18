@@ -45,7 +45,7 @@ ls | sort -n> /tmp/list.txt
 input="/tmp/list.txt"
 arrayIndex=1;
 
-echo "          picSet = [ {}," >> xPeepWave.html
+echo "          picSet = [ {src: \"\", wav: 0}," >> xPeepWave.html
 while IFS= read -r line
 do
     EVAL=`echo " \"$line\" "`

@@ -18,7 +18,7 @@ let imgIndex=0;
 let picSet;
 let wavSet;
 let isCanvasVisible=false;
-let isPlaying=false;
+let isPaused=true;
 //}}}variable declarations
 
 //{{{event listeners
@@ -100,9 +100,6 @@ async function initWin() {
     }, 10);//setTimeOut (function()
 
 
-    //canvas.addEventListener("mousemove", function (e) { moveHole('move', e) }, false);
-    //canvas.addEventListener("mouseout", function (e) { moveHole('out', e) }, false);
-
     tingSound = new sound(srcDir+"wav/ting.mp3");
     jingSound = new sound(srcDir+"wav/jing.mp3");
     pickSound = new sound(srcDir+"wav/pick.mp3");
@@ -161,7 +158,7 @@ function showAlt() {
     tingSound.start();
 } //function showAlt()
 function nextScene(chosenIndx) {
-    isPlaying = false;
+    wavSet[picSet[imgIndex].wav].stop(); 
 
     hole = 75;
     ctx2D.fillRect (0,0, canvas.width, canvas.height);
@@ -181,17 +178,18 @@ function nextScene(chosenIndx) {
 function togglePlay() {
 
     //console.log ("audio: "+wavSet[picSet[imgIndex].wav].sound.src);
-    if (isPlaying) {
+    if (!isPaused) {
         if (wavSet[picSet[imgIndex].wav]) pauseIndicator.style.display = "block";
         pauseIndicator.style.backgroundColor = "red";
         wavSet[picSet[imgIndex].wav].pause(); 
-        isPlaying = false; console.log("pause");
+        isPaused = true; 
+        //console.log("pause");
     } else {
         if (wavSet[picSet[imgIndex].wav]) pauseIndicator.style.display = "block";
         pauseIndicator.style.backgroundColor = "green";
         wavSet[picSet[imgIndex].wav].play(); 
-        isPlaying = true
-    } // if (isPlaying)
+        isPaused = false;
+    } // if (isPaused)
 } //function togglePlay()
 //}}}handler functions
 
@@ -217,9 +215,10 @@ function sound(src) {
     this.stop = function(){
         this.sound.pause();
         this.sound.currentTime = 0;
+        isPaused = true;
     }//this.stop = function(){    
     this.sound.onended = function () {
-        isPlaying = false;
+        isPaused = true;
         pauseIndicator.style.display = "none";
     }; //sound.onended
 }//function sound(src)
