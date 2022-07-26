@@ -30,7 +30,9 @@ function evalKeyDown(evnt) {
     let keyPressed = evnt.keyCode;
     //console.log ("keyUp: ",keyPressed);
     switch (keyPressed) {
-       //case 48  : nextScene(0); break; //key: 0
+       case 87  : if(!event.shiftKey) parent.postMessage("FocusSeq","*");
+                  else parent.postMessage("FocusTool","*"); 
+                  break; //key: w
        case 49  : nextScene(1); break; //key: 1
        case 50  : nextScene(2); break; //key: 2
        case 51  : nextScene(3); break; //key: 3
@@ -48,10 +50,21 @@ function evalKeyDown(evnt) {
                   break; //key: right
        case 37  : changeHole(0.666); break; //key: left
        case 32  : evnt.preventDefault(); togglePlay() ;break; //key: <spacebar>
-       case  8 : parent.focus(); break; //key: Escape --This gives control back to reveal.js when in an iframe 
         default : return;
     } //switch (keyPressed)
 } //evalKey(event)
+
+window.addEventListener('message', evalMessage);
+function evalMessage (evnt) {
+    // Get the sent data
+    var data = evnt.data;
+    //console.log ("message received");
+
+    if (data == "FocusIframe") {
+        //console.log("focusDummy");
+        document.getElementById('dummy').focus();
+    }
+} //function evalMessage(event)
 
 //}}}event listeners
 
@@ -68,6 +81,8 @@ const checkElement = async selector => {
 async function initWin() {
 
     await delay (60);
+    //check to see if element is loaded
+    checkElement('backgroundX').then((selector) => { console.log(selector); });
 
     //check to see if element is loaded
     checkElement('can0').then((selector) => { console.log(selector); });
@@ -105,6 +120,7 @@ async function initWin() {
     pickSound = new sound(srcDir+"wav/pick.mp3");
 
     initArrays(); 
+    picSet[0].wav = 0;
 
     pauseIndicator = document.getElementById('pauseIndicator');
     document.getElementById("dummy").focus(); //dummy select element that grabs the focus of the iframe
@@ -114,6 +130,7 @@ async function initWin() {
 //}}}window init
 
 //{{{handler functions
+
 function changeHole(mult) {
     hole = Math.round (hole*mult);
     holeBorder = Math.round (holeBorder*mult);
@@ -158,7 +175,8 @@ function showAlt() {
     tingSound.start();
 } //function showAlt()
 function nextScene(chosenIndx) {
-    wavSet[picSet[imgIndex].wav].stop(); 
+    //stop associated audio whenever the picture changes. Do this only if ./wav directory is populated
+    if (wavSet.length>2) wavSet[picSet[imgIndex].wav].stop(); 
 
     hole = 75;
     ctx2D.fillRect (0,0, canvas.width, canvas.height);
@@ -216,7 +234,7 @@ function sound(src) {
         this.sound.pause();
         this.sound.currentTime = 0;
         isPaused = true;
-    }//this.stop = function(){    
+    }//this.stop = function()    
     this.sound.onended = function () {
         isPaused = true;
         pauseIndicator.style.display = "none";
